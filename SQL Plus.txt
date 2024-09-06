@@ -1,0 +1,1467 @@
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Sat Jul 27 21:45:43 2024
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+Last Successful login time: Sat Jul 27 2024 21:45:06 +05:45
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> connect system
+Enter password:
+Connected.
+SQL>  CREATE TABLE Customer(customer_id INT PRIMARY KEY, customer_name VARCHAR(20), customer_email VARCHAR(20), customer_address VARCHAR(20), customer_type_id INT);
+
+Table created.
+
+SQL> DESCRIBE Customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMER_ID                               NOT NULL NUMBER(38)
+ CUSTOMER_NAME                                      VARCHAR2(20)
+ CUSTOMER_EMAIL                                     VARCHAR2(20)
+ CUSTOMER_ADDRESS                                   VARCHAR2(20)
+ CUSTOMER_TYPE_ID                                   NUMBER(38)
+
+SQL> SELECT * FROM Customer;
+
+no rows selected
+
+SQL> CREATE TABLE Customer_Type(
+  2  customer_type_id INT PRIMARY KEY NOT NULL,
+  3  customer_type_name VARCHAR(20) NOT NULL,
+  4  Discount_rate DECIMAL NOT NULL;
+Discount_rate DECIMAL NOT NULL
+                             *
+ERROR at line 4:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE Customer_Type(
+  2  customer_type_id INT PRIMARY KEY NOT NULL,
+  3  customer_type_name VARCHAR(20) NOT NULL,
+  4  Discount_rate DECIMAL NOT NULL);
+
+Table created.
+
+SQL> DESC Customer_Type;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMER_TYPE_ID                          NOT NULL NUMBER(38)
+ CUSTOMER_TYPE_NAME                        NOT NULL VARCHAR2(20)
+ DISCOUNT_RATE                             NOT NULL NUMBER(38)
+
+SQL> CREATE TABLE ORDER(
+  2  order_id INT PRIMARY KEY NOT NULL,
+  3  customer_id INT PRIMARY KEY NOT NULL,
+  4  order_date INT NOT NULL,
+  5  total_order INT Not Null,
+  6  payment_option VARCHAR(20) NOT NULL,
+  7  shipping_address Varchar(20) NOT NULL,
+  8  payment_id INT NOT NULL;
+CREATE TABLE ORDER(
+             *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> CREATE TABLE ORDER(
+  2  order_id INT PRIMARY KEY NOT NULL,
+  3  customer_id INT PRIMARY KEY NOT NULL,
+  4  order_date INT NOT NULL,
+  5  total_order INT Not Null,
+  6  payment_option VARCHAR(20) NOT NULL,
+  7  shipping_address Varchar(20) NOT NULL,
+  8  payment_id INT NOT NULL);
+CREATE TABLE ORDER(
+             *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> CREATE TABLE Order(
+  2  order_id INT PRIMARY KEY NOT NULL,
+  3  customer_id INT PRIMARY KEY NOT NULL,
+  4  order_date INT NOT NULL,
+  5  total_order INT Not Null,
+  6  payment_option VARCHAR(20) NOT NULL,
+  7  shipping_address Varchar(20) NOT NULL,
+  8  payment_id INT NOT NULL);
+CREATE TABLE Order(
+             *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> DROP TABLE Order;
+DROP TABLE Order
+           *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> DROP TABLE ORDER;
+DROP TABLE ORDER
+           *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> CREATE TABLE Orders (  -- Use "Orders" instead of "Order"
+  2      order_id INT PRIMARY KEY NOT NULL,
+  3      customer_id INT NOT NULL,
+  4      order_date INT NOT NULL,
+  5      total_order INT NOT NULL,
+  6      payment_option VARCHAR(20) NOT NULL,
+  7      shipping_address VARCHAR(20) NOT NULL,
+  8      payment_id INT NOT NULL
+  9  );
+
+Table created.
+
+SQL> DROP TABLE Orders;
+
+Table dropped.
+
+SQL> CREATE TABLE Orders (  -- Use "Orders" instead of "Order"
+  2      order_id INT PRIMARY KEY NOT NULL,
+  3      customer_id INT NOT NULL,
+  4      order_date INT NOT NULL,
+  5      total_order INT NOT NULL,
+  6      payment_option VARCHAR(20) NOT NULL,
+  7      shipping_address VARCHAR(20) NOT NULL,
+  8      payment_id INT NOT NULL
+  9
+SQL> DROP TABLE Orders;
+DROP TABLE Orders
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> CREATE TABLE Orders(
+  2   order_id INT PRIMARY KEY NOT NULL,
+  3      customer_id INT NOT NULL,
+  4      order_date INT NOT NULL,
+  5      total_order INT NOT NULL,
+  6      payment_option VARCHAR(20) NOT NULL,
+  7      shipping_address VARCHAR(20) NOT NULL,
+  8      payment_id INT NOT NULL,
+  9      invoice_id INT NOT NULL);
+
+Table created.
+
+SQL> DESC Orders;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ CUSTOMER_ID                               NOT NULL NUMBER(38)
+ ORDER_DATE                                NOT NULL NUMBER(38)
+ TOTAL_ORDER                               NOT NULL NUMBER(38)
+ PAYMENT_OPTION                            NOT NULL VARCHAR2(20)
+ SHIPPING_ADDRESS                          NOT NULL VARCHAR2(20)
+ PAYMENT_ID                                NOT NULL NUMBER(38)
+ INVOICE_ID                                NOT NULL NUMBER(38)
+
+SQL> Create table invoice(
+  2  Invoice_id Int PRIMARY KEY NOT NULL,
+  3
+SQL> CREATE TABLE invoice(
+  2  Invoice_id INT PRIMARY KEY NOT NULL,
+  3  order_id INT NOT NULL,
+  4  invoice_data VARCHAR(20) NOT NULL);
+
+Table created.
+
+SQL> DESC invoice;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ INVOICE_ID                                NOT NULL NUMBER(38)
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ INVOICE_DATA                              NOT NULL VARCHAR2(20)
+
+SQL> CREATE TABLE order_item(
+  2  order_id INT PRIMARY KEY NOT NULL,
+  3  product_id INT PRIMARY KEY NOT NULL,
+  4  quantity INT NOT NULL,
+  5  unit_price INT NOT NULL,
+  6  discount_amount INT NOT NULL);
+product_id INT PRIMARY KEY NOT NULL,
+               *
+ERROR at line 3:
+ORA-02260: table can have only one primary key
+
+
+SQL> CREATE TABLE order_item(
+  2  order_id INT NOT NULL,
+  3  product_id INT NOT NULL,
+  4  quantity INT NOT NULL,
+  5  unit_price INT NOT NULL,
+  6  discount_amount INT NOT NULL);
+
+Table created.
+
+SQL> DESC order_item;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ PRODUCT_ID                                NOT NULL NUMBER(38)
+ QUANTITY                                  NOT NULL NUMBER(38)
+ UNIT_PRICE                                NOT NULL NUMBER(38)
+ DISCOUNT_AMOUNT                           NOT NULL NUMBER(38)
+
+SQL> CREATE TABLE Payment(
+  2  payment_id INT PRIMARY KEY NOT NULL,
+  3  order_id INT NOT NULL,
+  4  payment_type VARCHAR(20),
+  5  payment_amount INT NOT NULL);
+
+Table created.
+
+SQL> DESC Payment;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PAYMENT_ID                                NOT NULL NUMBER(38)
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ PAYMENT_TYPE                                       VARCHAR2(20)
+ PAYMENT_AMOUNT                            NOT NULL NUMBER(38)
+
+SQL> CREATE TABLE Vendor(
+  2  vendor_id INT PRIMARY KEY NOT NULL,
+  3  vendor_name VARCHAR(20), MOT NULL,
+  4  vendor_contact VARCHAR(20)
+  5
+SQL> CREATE TABLE Vendor(
+  2  vendor_id INT PRIMARY KEY NOT NULL,
+  3  vendor_name VARCHAR(20) NOT NULL,
+  4  vendor_contact INT NOT NULL);
+
+Table created.
+
+SQL> DESC Vendor;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ VENDOR_ID                                 NOT NULL NUMBER(38)
+ VENDOR_NAME                               NOT NULL VARCHAR2(20)
+ VENDOR_CONTACT                            NOT NULL NUMBER(38)
+
+SQL> SHOW TABLES;
+SP2-0158: unknown SHOW option "TABLES"
+SQL> show tables;
+SP2-0158: unknown SHOW option "tables"
+SQL> CREATE TABLE Products(
+  2  product_id INT PRIMARY KEY NOT NULL,
+  3  product_name VARCHAR(20) NOT NULL,
+  4  product_category VARCHAR(20) NOT NULL,
+  5  product_price INT NOT NULL,
+  6  product_image_url VARCHAR(255),
+  7  product_stock INT NOT NULL,
+  8  product_ratio DECIMAL(2,1),
+  9  vendor_id INT NOT NULL);
+
+Table created.
+
+SQL> DESC Products;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_ID                                NOT NULL NUMBER(38)
+ PRODUCT_NAME                              NOT NULL VARCHAR2(20)
+ PRODUCT_CATEGORY                          NOT NULL VARCHAR2(20)
+ PRODUCT_PRICE                             NOT NULL NUMBER(38)
+ PRODUCT_IMAGE_URL                                  VARCHAR2(255)
+ PRODUCT_STOCK                             NOT NULL NUMBER(38)
+ PRODUCT_RATIO                                      NUMBER(2,1)
+ VENDOR_ID                                 NOT NULL NUMBER(38)
+
+SQL> -- Inserting Values into the Customer Table
+SQL> INSERT INTO Customer (customer_id, customer_name, customer_email, customer_address, customer_type_id)
+  2  VALUES
+  3      (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+  4      (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5),
+  5      (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5),
+  6      (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5),
+  7      (5, 'Michael Wilson', 'michael.wilson@example.com', '1213 Maple Rd', 5);
+    (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+                                                             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO Customer (customer_id, customer_name, customer_email, customer_address, customer_type_id)
+  2  VALUES
+  3      (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+  4      (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5),
+  5      (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5),
+  6      (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5),
+  7      (5, 'Michael Wilson', 'michael.wilson@example.com', '1213 Maple Rd', 5);
+    (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+                                                             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO Customer (customer_id, customer_name, customer_email, customer_address, customer_type_id)
+  2  VALUES
+  3      (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+  4      (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5),
+  5      (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5),
+  6      (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5),
+  7      (5, 'Michael Wilson', 'michael.wilson@example.com', '1213 Maple Rd', 5);
+    (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+                                                             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO Customer (customer_id, customer_name, customer_email, customer_address, customer_type_id)
+  2  VALUES
+  3      (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+  4      (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5),
+  5      (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5),
+  6      (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5),
+  7      (5, 'Michael Wilson', 'michael.wilson@example.com', '1213 Maple Rd', 5);
+    (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+                                                             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO Customer (customer_id, customer_name, customer_email, customer_address, customer_type_id)
+  2  VALUES
+  3      (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+  4      (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5),
+  5      (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5),
+  6      (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5),
+  7      (5, 'Michael Wilson', 'michael.wilson@example.com', '1213 Maple Rd', 5);
+    (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+                                                             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT ALL
+  2  INTO Customer VALUES  3      (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5),
+  3    4      (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5),
+  4    5      (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5),
+  5    6      (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5),
+  6
+SQL> INSERT ALL
+  2  INTO Customer VALUES (1, 'John Doe', 'john.doe@example.com', '123 Main St', 5)
+  3  INTO Customer VALUES (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5)
+  4  INTO Customer VALUES (3, 'David Lee', 'david.lee@example.com', '789 Pine Ln', 5)
+  5  INTO Customer VALUES  (4, 'Emily Brown', 'emily.brown@example.com', '1011 Elm St', 5)   6  INTO Customer VALUES (5, 'Michael Wilson', 'michael.wilson@example.com', '1213 Maple R
+d', 5)
+  7  SELECT * FROM DUAL;
+INTO Customer VALUES (2, 'Jane Smith', 'jane.smith@example.com', '456 Oak Ave', 5)
+                                       *
+ERROR at line 3:
+ORA-12899: value too large for column "SYSTEM"."CUSTOMER"."CUSTOMER_EMAIL"
+(actual: 22, maximum: 20)
+
+
+SQL> INSERT ALL
+  2
+SQL> desc customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMER_ID                               NOT NULL NUMBER(38)
+ CUSTOMER_NAME                                      VARCHAR2(20)
+ CUSTOMER_EMAIL                                     VARCHAR2(20)
+ CUSTOMER_ADDRESS                                   VARCHAR2(20)
+ CUSTOMER_TYPE_ID                                   NUMBER(38)
+
+SQL> INSERT ALL
+  2  INTO Customer VALUES(1, 'SUDAM','sudam@gmail.com','Kathmandu',1)
+  3  INTO Customer VALUES(2, 'MANISH','manish@gmail.com','Surkhet',2)
+  4  INTO Customer VALUES(3, 'RAM','ram@gmail.com','Dhangadi',3)
+  5  INTO Customer VALUES(4, 'AAYUSH','aayush@gmail.com','Pokhara',2)
+  6  INTO Customer VALUES(5, 'KRITI','kritii@gmail.com','Pokhara',1)
+  7  SELECT * FROM DUAL;
+
+5 rows created.
+
+SQL> DESC CUSTOMER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMER_ID                               NOT NULL NUMBER(38)
+ CUSTOMER_NAME                                      VARCHAR2(20)
+ CUSTOMER_EMAIL                                     VARCHAR2(20)
+ CUSTOMER_ADDRESS                                   VARCHAR2(20)
+ CUSTOMER_TYPE_ID                                   NUMBER(38)
+
+SQL> SELECT * FROM Customer;
+
+CUSTOMER_ID CUSTOMER_NAME        CUSTOMER_EMAIL       CUSTOMER_ADDRESS
+----------- -------------------- -------------------- --------------------
+CUSTOMER_TYPE_ID
+----------------
+          1 SUDAM                sudam@gmail.com      Kathmandu
+               1
+
+          2 MANISH               manish@gmail.com     Surkhet
+               2
+
+          3 RAM                  ram@gmail.com        Dhangadi
+               3
+
+
+CUSTOMER_ID CUSTOMER_NAME        CUSTOMER_EMAIL       CUSTOMER_ADDRESS
+----------- -------------------- -------------------- --------------------
+CUSTOMER_TYPE_ID
+----------------
+          4 AAYUSH               aayush@gmail.com     Pokhara
+               2
+
+          5 KRITI                kritii@gmail.com     Pokhara
+               1
+
+
+SQL> SELECT * FROM DUAL;
+
+D
+-
+X
+
+SQL> desc customer_type;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMER_TYPE_ID                          NOT NULL NUMBER(38)
+ CUSTOMER_TYPE_NAME                        NOT NULL VARCHAR2(20)
+ DISCOUNT_RATE                             NOT NULL NUMBER(38)
+
+SQL> INSERT ALL
+  2  INTO customer_type VALUES (1, 'Regular', 2.5)
+  3  INTO customer_type VALUES (2, 'Staff', 5.5)
+  4  INTO customer_type VALUES (3, 'VIP', 8.2)
+  5  SELECT * FROM DUAL;
+
+3 rows created.
+
+SQL> SELECT * FROM customer_type;
+
+CUSTOMER_TYPE_ID CUSTOMER_TYPE_NAME   DISCOUNT_RATE
+---------------- -------------------- -------------
+               1 Regular                          3
+               2 Staff                            6
+               3 VIP                              8
+
+SQL> DESC Orders;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ CUSTOMER_ID                               NOT NULL NUMBER(38)
+ ORDER_DATE                                NOT NULL NUMBER(38)
+ TOTAL_ORDER                               NOT NULL NUMBER(38)
+ PAYMENT_OPTION                            NOT NULL VARCHAR2(20)
+ SHIPPING_ADDRESS                          NOT NULL VARCHAR2(20)
+ PAYMENT_ID                                NOT NULL NUMBER(38)
+ INVOICE_ID                                NOT NULL NUMBER(38)
+
+SQL> INSERT ALL
+  2  INTO Orders VALUES(1, 2, TO_DATE('2/1/2024', 'DD/MM/YYYY'), 3, 'CASH_ON_DELIVERY', 'Putalisadak', 3, 4)
+  3  INTO Orders VALUES(2, 3, TO_DATE('5/2/2024', 'DD/MM/YYYY'), 1, 'ESEWA', 'NEW_ROAD', 1, 2)
+  4  INTO Orders VALUES(3, 4, TO_DATE('8/2/2024', 'DD/MM/YYYY'), 2, 'Nabil_Bank', 'Naxal', 2, 3)
+  5  INTO Orders VALUES(4, 5, TO_DATE('11/2/2024', 'DD/MM/YYYY'), 5, 'NIC_ASIA', 'Hadigaun', 3, 1)
+  6  SELECT * FROM DUAL;
+INTO Orders VALUES(1, 2, TO_DATE('2/1/2024', 'DD/MM/YYYY'), 3, 'CASH_ON_DELIVERY', 'Putalisadak', 3, 4)
+                         *
+ERROR at line 2:
+ORA-00932: inconsistent datatypes: expected NUMBER got DATE
+
+
+SQL> INSERT ALL
+  2  INTO Orders VALUES(1, 2, 2/1/2024 , 3, 'CASH_ON_DELIVERY', 'Putalisadak', 3, 4)
+  3  INTO Orders VALUES(2, 3, 5/2/2024 , 1, 'ESEWA', 'NEW_ROAD', 1, 2)
+  4  INTO Orders VALUES(3, 4, 8/2/2024 , 2, 'Nabil_Bank', 'Naxal', 2, 3)
+  5  INTO Orders VALUES(4, 5, 11/2/2024 , 5, 'NIC_ASIA', 'Hadigaun', 3, 1)
+  6  SELECT * FROM DUAL;
+
+4 rows created.
+
+SQL> SELECT* FROM Orders;
+
+  ORDER_ID CUSTOMER_ID ORDER_DATE TOTAL_ORDER PAYMENT_OPTION
+---------- ----------- ---------- ----------- --------------------
+SHIPPING_ADDRESS     PAYMENT_ID INVOICE_ID
+-------------------- ---------- ----------
+         1           2          0           3 CASH_ON_DELIVERY
+Putalisadak                   3          4
+
+         2           3          0           1 ESEWA
+NEW_ROAD                      1          2
+
+         3           4          0           2 Nabil_Bank
+Naxal                         2          3
+
+
+  ORDER_ID CUSTOMER_ID ORDER_DATE TOTAL_ORDER PAYMENT_OPTION
+---------- ----------- ---------- ----------- --------------------
+SHIPPING_ADDRESS     PAYMENT_ID INVOICE_ID
+-------------------- ---------- ----------
+         4           5          0           5 NIC_ASIA
+Hadigaun                      3          1
+
+
+SQL> INSERT INTO order_item VALUES (1, 3, 1, 2000, 100);
+
+1 row created.
+
+SQL> INSERT INTO order_item VALUES (2, 1, 3, 3000, 199);
+
+1 row created.
+
+SQL> INSERT INTO order_item VALUES (3, 2, 1, 8000, 385);
+
+1 row created.
+
+SQL> INSERT INTO order_item VALUES (4, 4, 2, 700, 30);
+
+1 row created.
+
+SQL> SELECT * FROM order_item;
+
+  ORDER_ID PRODUCT_ID   QUANTITY UNIT_PRICE DISCOUNT_AMOUNT
+---------- ---------- ---------- ---------- ---------------
+         1          3          1       2000             100
+         2          1          3       3000             199
+         3          2          1       8000             385
+         4          4          2        700              30
+
+SQL> SELECT * FROM orders;
+
+  ORDER_ID CUSTOMER_ID ORDER_DATE TOTAL_ORDER PAYMENT_OPTION
+---------- ----------- ---------- ----------- --------------------
+SHIPPING_ADDRESS     PAYMENT_ID INVOICE_ID
+-------------------- ---------- ----------
+         1           2          0           3 CASH_ON_DELIVERY
+Putalisadak                   3          4
+
+         2           3          0           1 ESEWA
+NEW_ROAD                      1          2
+
+         3           4          0           2 Nabil_Bank
+Naxal                         2          3
+
+
+  ORDER_ID CUSTOMER_ID ORDER_DATE TOTAL_ORDER PAYMENT_OPTION
+---------- ----------- ---------- ----------- --------------------
+SHIPPING_ADDRESS     PAYMENT_ID INVOICE_ID
+-------------------- ---------- ----------
+         4           5          0           5 NIC_ASIA
+Hadigaun                      3          1
+
+
+SQL> INSERT INTO Payment VALUES (1, 2, 'CREDIT_CARD', 1800)
+  2  INSERT INTO Payment VALUES (2, 3, 'CREDIT_CARD', 2400)
+  3  INSERT INTO Payment VALUES (3, 2, 'DEBIT_CARD', 2400)
+  4  INSERT INTO Payment VALUES (3, 2, 'DIGITAL_WALLETS', 1400)
+  5  ;
+INSERT INTO Payment VALUES (2, 3, 'CREDIT_CARD', 2400)
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> INSERT INTO Payment VALUES (3, 2, 'DIGITAL_WALLETS', 1400);
+
+1 row created.
+
+SQL> INSERT INTO Payment VALUES (1, 2, 'CREDIT_CARD', 1800);
+
+1 row created.
+
+SQL> INSERT INTO Payment VALUES (3, 2, 'DEBIT_CARD', 2400);
+INSERT INTO Payment VALUES (3, 2, 'DEBIT_CARD', 2400)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C008348) violated
+
+
+SQL> INSERT INTO Payment VALUES (2, 2, 'DEBIT_CARD', 2400);
+
+1 row created.
+
+SQL> INSERT INTO Payment VALUES (2, 3, 'CREDIT_CARD', 4500);
+INSERT INTO Payment VALUES (2, 3, 'CREDIT_CARD', 4500)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C008348) violated
+
+
+SQL> Select * FROM Payment;
+
+PAYMENT_ID   ORDER_ID PAYMENT_TYPE         PAYMENT_AMOUNT
+---------- ---------- -------------------- --------------
+         3          2 DIGITAL_WALLETS                1400
+         1          2 CREDIT_CARD                    1800
+         2          2 DEBIT_CARD                     2400
+
+SQL> DELETE FROM PAYMENT;
+
+3 rows deleted.
+
+SQL> INSERT INTO Payment VALUES (3, 2, 'DIGITAL_WALLETS', 1400);
+
+1 row created.
+
+SQL> INSERT INTO Payment VALUES (2, 3, 'CREDIT_CARD', 4500);
+
+1 row created.
+
+SQL> INSERT INTO Payment VALUES (1, 4, 'DEBIT_CARD', 2400);
+
+1 row created.
+
+SQL> INSERT INTO Payment VALUES (4, 1, 'CREDIT_CARD', 1800);
+
+1 row created.
+
+SQL> SELECT * FROM Payment;
+
+PAYMENT_ID   ORDER_ID PAYMENT_TYPE         PAYMENT_AMOUNT
+---------- ---------- -------------------- --------------
+         3          2 DIGITAL_WALLETS                1400
+         2          3 CREDIT_CARD                    4500
+         1          4 DEBIT_CARD                     2400
+         4          1 CREDIT_CARD                    1800
+
+SQL> SELECT * FROM INVOICE
+  2  ;
+
+no rows selected
+
+SQL> DESC INVOICE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ INVOICE_ID                                NOT NULL NUMBER(38)
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ INVOICE_DATA                              NOT NULL VARCHAR2(20)
+
+SQL> INSERT INTO INVOICE VALUES (1, 2, 'Invoice #1001, Date: 2023-12-15');
+INSERT INTO INVOICE VALUES (1, 2, 'Invoice #1001, Date: 2023-12-15')
+                                  *
+ERROR at line 1:
+ORA-12899: value too large for column "SYSTEM"."INVOICE"."INVOICE_DATA"
+(actual: 31, maximum: 20)
+
+
+SQL> INSERT INTO INVOICE VALUES (1, 2, 'Date: 2023-12-15');
+
+1 row created.
+
+SQL> INSERT INTO INVOICE VALUES (2, 1, 'Date: 2023-1-1');
+
+1 row created.
+
+SQL> INSERT INTO INVOICE VALUES (3, 3, 'Date: 2024-3-3');
+
+1 row created.
+
+SQL> SELECT * FROM INVOICE;
+
+INVOICE_ID   ORDER_ID INVOICE_DATA
+---------- ---------- --------------------
+         1          2 Date: 2023-12-15
+         2          1 Date: 2023-1-1
+         3          3 Date: 2024-3-3
+
+SQL> DESC PRODUCT;
+ERROR:
+ORA-04043: object PRODUCT does not exist
+
+
+SQL> DESC Product;
+ERROR:
+ORA-04043: object Product does not exist
+
+
+SQL> DESC Products;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_ID                                NOT NULL NUMBER(38)
+ PRODUCT_NAME                              NOT NULL VARCHAR2(20)
+ PRODUCT_CATEGORY                          NOT NULL VARCHAR2(20)
+ PRODUCT_PRICE                             NOT NULL NUMBER(38)
+ PRODUCT_IMAGE_URL                                  VARCHAR2(255)
+ PRODUCT_STOCK                             NOT NULL NUMBER(38)
+ PRODUCT_RATIO                                      NUMBER(2,1)
+ VENDOR_ID                                 NOT NULL NUMBER(38)
+
+SQL> INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE' 200000, '20' 1);
+INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE' 200000, '20' 1)
+                                                            *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, '20' 1);
+INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, '20' 1)
+                                                                          *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, '20', 1);
+INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, '20', 1)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, 'IMAGE', 20, (4,1
+), 1);
+INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, 'IMAGE', 20, (4,1), 1)
+                                                                                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, 'IMAGE', 20, 2,1 , 1);
+INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, 'IMAGE', 20, 2,1 , 1)
+            *
+ERROR at line 1:
+ORA-00913: too many values
+
+
+SQL> INSERT INTO PRODUCTS VALUES (1, 'Samsung_S22', 'SMARTPHONE', 200000, 'IMAGE', 20, 2 ,
+1);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTS VALUES (2, 'IPHONE_13', 'SMARTPHONE', 180000, 'IMAGE', 10, 5 , 2)
+;
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTS VALUES (3, 'ROG15', 'LAPTOP', 230000, 'IMAGE', 8, 3 , 3);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTS VALUES (4, 'Oneplus_Nord', 'Earbuds', 7000, 'IMAGE', 12, 4 , 4);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTS VALUES (5, 'HP_Spectre', 'Laptop', 220000, 'IMAGE', 14, 6 , 5);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTS VALUES (6, 'Google_Pixel', 'SmartPhone', 140000, 'IMAGE', 8, 6 ,
+6);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTS VALUES (7, 'sony', 'Headphones', 12000, 'IMAGE', 14, 6 , 7);
+
+1 row created.
+
+SQL> SELECT * FROM PRODUCTS;
+
+PRODUCT_ID PRODUCT_NAME         PRODUCT_CATEGORY     PRODUCT_PRICE
+---------- -------------------- -------------------- -------------
+PRODUCT_IMAGE_URL
+--------------------------------------------------------------------------------
+PRODUCT_STOCK PRODUCT_RATIO  VENDOR_ID
+------------- ------------- ----------
+         1 Samsung_S22          SMARTPHONE                  200000
+IMAGE
+           20             2          1
+
+         2 IPHONE_13            SMARTPHONE                  180000
+IMAGE
+           10             5          2
+
+PRODUCT_ID PRODUCT_NAME         PRODUCT_CATEGORY     PRODUCT_PRICE
+---------- -------------------- -------------------- -------------
+PRODUCT_IMAGE_URL
+--------------------------------------------------------------------------------
+PRODUCT_STOCK PRODUCT_RATIO  VENDOR_ID
+------------- ------------- ----------
+
+         3 ROG15                LAPTOP                      230000
+IMAGE
+            8             3          3
+
+         4 Oneplus_Nord         Earbuds                       7000
+IMAGE
+
+PRODUCT_ID PRODUCT_NAME         PRODUCT_CATEGORY     PRODUCT_PRICE
+---------- -------------------- -------------------- -------------
+PRODUCT_IMAGE_URL
+--------------------------------------------------------------------------------
+PRODUCT_STOCK PRODUCT_RATIO  VENDOR_ID
+------------- ------------- ----------
+           12             4          4
+
+         5 HP_Spectre           Laptop                      220000
+IMAGE
+           14             6          5
+
+         6 Google_Pixel         SmartPhone                  140000
+
+PRODUCT_ID PRODUCT_NAME         PRODUCT_CATEGORY     PRODUCT_PRICE
+---------- -------------------- -------------------- -------------
+PRODUCT_IMAGE_URL
+--------------------------------------------------------------------------------
+PRODUCT_STOCK PRODUCT_RATIO  VENDOR_ID
+------------- ------------- ----------
+IMAGE
+            8             6          6
+
+         7 sony                 Headphones                   12000
+IMAGE
+           14             6          7
+
+
+7 rows selected.
+
+SQL> DESC VENDOR
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ VENDOR_ID                                 NOT NULL NUMBER(38)
+ VENDOR_NAME                               NOT NULL VARCHAR2(20)
+ VENDOR_CONTACT                            NOT NULL NUMBER(38)
+
+SQL> INSERT INTO VENDOR VALUES(1, ONEPLUS, 9898989);
+INSERT INTO VENDOR VALUES(1, ONEPLUS, 9898989)
+                             *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> INSERT INTO VENDOR VALUES(1, 'ONEPLUS', 9898989);
+
+1 row created.
+
+SQL> INSERT INTO VENDOR VALUES(1, 'HP', 979797);
+INSERT INTO VENDOR VALUES(1, 'HP', 979797)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C008352) violated
+
+
+SQL> INSERT INTO VENDOR VALUES(2, 'HP', 979797);
+
+1 row created.
+
+SQL> INSERT INTO VENDOR VALUES(3, 'SAMSUNG', 969696);
+
+1 row created.
+
+SQL> INSERT INTO VENDOR VALUES(4, 'APPLE', 950505);
+
+1 row created.
+
+SQL> INSERT INTO VENDOR VALUES(5, 'SONY', 919191);
+
+1 row created.
+
+SQL> SELECT * FROM VENDOR;
+
+ VENDOR_ID VENDOR_NAME          VENDOR_CONTACT
+---------- -------------------- --------------
+         1 ONEPLUS                     9898989
+         2 HP                           979797
+         3 SAMSUNG                      969696
+         4 APPLE                        950505
+         5 SONY                         919191
+
+SQL> Select * From Customer
+  2
+SQL>
+SQL> SELECT * FROM ORDER
+  2
+SQL> SELECT * FROM ORDER;
+SELECT * FROM ORDER
+              *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> SELECT * FROM ORDERs;
+
+  ORDER_ID CUSTOMER_ID ORDER_DATE TOTAL_ORDER PAYMENT_OPTION
+---------- ----------- ---------- ----------- --------------------
+SHIPPING_ADDRESS     PAYMENT_ID INVOICE_ID
+-------------------- ---------- ----------
+         1           2          0           3 CASH_ON_DELIVERY
+Putalisadak                   3          4
+
+         2           3          0           1 ESEWA
+NEW_ROAD                      1          2
+
+         3           4          0           2 Nabil_Bank
+Naxal                         2          3
+
+
+  ORDER_ID CUSTOMER_ID ORDER_DATE TOTAL_ORDER PAYMENT_OPTION
+---------- ----------- ---------- ----------- --------------------
+SHIPPING_ADDRESS     PAYMENT_ID INVOICE_ID
+-------------------- ---------- ----------
+         4           5          0           5 NIC_ASIA
+Hadigaun                      3          1
+
+
+SQL> SELECT * FROM ORDER_ITEM
+  2  ;
+
+  ORDER_ID PRODUCT_ID   QUANTITY UNIT_PRICE DISCOUNT_AMOUNT
+---------- ---------- ---------- ---------- ---------------
+         1          3          1       2000             100
+         2          1          3       3000             199
+         3          2          1       8000             385
+         4          4          2        700              30
+
+SQL> SELECT * FROM INVOICE;
+
+INVOICE_ID   ORDER_ID INVOICE_DATA
+---------- ---------- --------------------
+         1          2 Date: 2023-12-15
+         2          1 Date: 2023-1-1
+         3          3 Date: 2024-3-3
+
+SQL> SELECT * FROM PAYMENT
+  2  ;
+
+PAYMENT_ID   ORDER_ID PAYMENT_TYPE         PAYMENT_AMOUNT
+---------- ---------- -------------------- --------------
+         3          2 DIGITAL_WALLETS                1400
+         2          3 CREDIT_CARD                    4500
+         1          4 DEBIT_CARD                     2400
+         4          1 CREDIT_CARD                    1800
+
+SQL> SELECT c.CustomerID, c.CustomerName, c.CustomerEmail, c.CustomerAddress
+  2  FROM Customer c
+  3  JOIN CustomerType ct ON c.CustomerTypeID = ct.CustomerTypeID
+  4  WHERE ct.CustomerTypeName = 'Staff';
+JOIN CustomerType ct ON c.CustomerTypeID = ct.CustomerTypeID
+     *
+ERROR at line 3:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT C.*
+  2  FROM CUSTOMER C
+  3  JOIN CUSTOMER_TYPETABLE CTT ON C.CUSTOMER_TYPEID = CTT.CUSTOMER_TYPE_ID
+  4  WHERE CTT.CUSTOMER_TYPE = 'S';
+JOIN CUSTOMER_TYPETABLE CTT ON C.CUSTOMER_TYPEID = CTT.CUSTOMER_TYPE_ID
+     *
+ERROR at line 3:
+ORA-00942: table or view does not exist
+
+
+SQL> DESC CUSTOMER_TYPE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTOMER_TYPE_ID                          NOT NULL NUMBER(38)
+ CUSTOMER_TYPE_NAME                        NOT NULL VARCHAR2(20)
+ DISCOUNT_RATE                             NOT NULL NUMBER(38)
+
+SQL> SELECT c.CustomerID, c.CustomerName, c.CustomerEmail, c.CustomerAddress
+  2  FROM Customer c
+  3  JOIN CustomerType ct ON c.CustomerTypeID = ct.CustomerTypeID
+  4
+SQL> SELECT c.Customer_ID, c.Customer_Name, c.Customer_Email, c.Customer_Address
+  2  FROM Customer c
+  3  JOIN Customer_Type ct ON c.Customer_Type_ID = ct.Customer_Type_ID
+  4  WHERE ct.Customer_Type_Name = 'Staff';
+
+CUSTOMER_ID CUSTOMER_NAME        CUSTOMER_EMAIL       CUSTOMER_ADDRESS
+----------- -------------------- -------------------- --------------------
+          2 MANISH               manish@gmail.com     Surkhet
+          4 AAYUSH               aayush@gmail.com     Pokhara
+
+SQL> SELECT o.Order_ID, o.Customer_ID, o.Order_Date, o.Total_Order
+  2  FROM Order o
+  3  JOIN Order_Item oi ON o.Order_ID = oi.Order_ID
+  4  WHERE oi.Product_ID = [Product ID]  -- Replace [Product ID] with the specific product ID
+  5  AND o.Order_Date BETWEEN '2023-05-01' AND '2023-05-28';
+FROM Order o
+     *
+ERROR at line 2:
+ORA-00903: invalid table name
+
+
+SQL> DESC ORDERS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_ID                                  NOT NULL NUMBER(38)
+ CUSTOMER_ID                               NOT NULL NUMBER(38)
+ ORDER_DATE                                NOT NULL NUMBER(38)
+ TOTAL_ORDER                               NOT NULL NUMBER(38)
+ PAYMENT_OPTION                            NOT NULL VARCHAR2(20)
+ SHIPPING_ADDRESS                          NOT NULL VARCHAR2(20)
+ PAYMENT_ID                                NOT NULL NUMBER(38)
+ INVOICE_ID                                NOT NULL NUMBER(38)
+
+SQL> SELECT o.Order_ID, o.Customer_ID, o.Order_Date, o.Total_Order
+  2  FROM Orders o
+  3  JOIN Order_Item oi ON o.Order_ID = oi.Order_ID
+  4  WHERE oi.Product_ID = [Product ID]  -- Replace [Product ID] with the specific product ID
+  5  AND o.Order_Date BETWEEN '2023-05-01' AND '2023-05-28';
+WHERE oi.Product_ID = [Product ID]  -- Replace [Product ID] with the specific product ID
+                      *
+ERROR at line 4:
+ORA-00936: missing expression
+
+
+SQL> SELECT o.OrderID, o.CustomerID, o.OrderDate, o.TotalOrder
+  2  FROM Orders o
+  3  JOIN OrderItem oi ON o.OrderID = oi.OrderID
+  4  WHERE oi.ProductID = [Product ID]
+  5  AND o.OrderDate BETWEEN '2023-05-01' AND '2023-05-28';
+WHERE oi.ProductID = [Product ID]
+                     *
+ERROR at line 4:
+ORA-00936: missing expression
+
+
+SQL> SELECT o.OrderID, o.CustomerID, o.OrderDate, o.TotalOrder
+  2  FROM Orders o
+  3  LEFT JOIN Order_Item oi ON o.Order_ID = oi.Order_ID
+  4  AND o.OrderDate BETWEEN '2023-05-01' AND '2023-05-28';
+AND o.OrderDate BETWEEN '2023-05-01' AND '2023-05-28'
+    *
+ERROR at line 4:
+ORA-00904: "O"."ORDERDATE": invalid identifier
+
+
+SQL> SELECT o.OrderID, o.CustomerID, o.OrderDate, o.TotalOrder
+  2  FROM Orders o
+  3  JOIN OrderItem oi ON o.OrderID = oi.OrderID
+  4  WHERE o.OrderDate BETWEEN '2023-05-01' AND '2023-05-28';
+JOIN OrderItem oi ON o.OrderID = oi.OrderID
+     *
+ERROR at line 3:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT o.Order_ID, o.Customer_ID, o.Order_Date, o.Total_Order
+  2  FROM Orders o
+  3  LEFT JOIN Order_Item oi ON o.Order_ID = oi.Order_ID
+  4  WHERE o.Order_Date BETWEEN '2023-05-01' AND '2023-05-28';
+WHERE o.Order_Date BETWEEN '2023-05-01' AND '2023-05-28'
+                                            *
+ERROR at line 4:
+ORA-01722: invalid number
+
+
+SQL> SELECT  c.customer_ID, c.Customer_Name, c.customer_email, c.Customer_address, o.ORDER_
+ID, oi.Product_ID, oi.Quantity, oi.Unit_Price, oi.Discount Amount
+  2  FROM Customer c
+  3  LEFT JOI
+  4
+SQL> SELECT  c.customer_ID, c.Customer_Name, c.customer_email, c.Customer_address, o.ORDER_ID, oi.Product_ID, oi.Quantity, oi.Unit_Price, oi.Discount_Amount
+  2  FROM Customer c
+  3  LEFT JOIN ORDERS o ON c.customer_id = o.Customer_ID
+  4  LEFT JOIN ORDER_item oi ON c.ORDER_id = oi.ORDER_ID
+  5  ;
+LEFT JOIN ORDER_item oi ON c.ORDER_id = oi.ORDER_ID
+                           *
+ERROR at line 4:
+ORA-00904: "C"."ORDER_ID": invalid identifier
+
+
+SQL> SELECT
+  2      c.customer_ID,
+  3      c.Customer_Name,
+  4      c.customer_email,
+  5      c.Customer_address,
+  6      o.ORDER_ID,
+  7      oi.Product_ID,
+  8      oi.Quantity,
+  9      oi.Unit_Price,
+ 10      oi.Discount_Amount
+ 11  FROM
+ 12      Customer c
+ 13  LEFT JOIN
+ 14      ORDERS o ON c.customer_id = o.Customer_ID
+ 15  LEFT JOIN
+ 16      ORDER_item oi ON o.ORDER_ID = oi.ORDER_ID;
+
+CUSTOMER_ID CUSTOMER_NAME        CUSTOMER_EMAIL       CUSTOMER_ADDRESS
+----------- -------------------- -------------------- --------------------
+  ORDER_ID PRODUCT_ID   QUANTITY UNIT_PRICE DISCOUNT_AMOUNT
+---------- ---------- ---------- ---------- ---------------
+          2 MANISH               manish@gmail.com     Surkhet
+         1          3          1       2000             100
+
+          3 RAM                  ram@gmail.com        Dhangadi
+         2          1          3       3000             199
+
+          4 AAYUSH               aayush@gmail.com     Pokhara
+         3          2          1       8000             385
+
+
+CUSTOMER_ID CUSTOMER_NAME        CUSTOMER_EMAIL       CUSTOMER_ADDRESS
+----------- -------------------- -------------------- --------------------
+  ORDER_ID PRODUCT_ID   QUANTITY UNIT_PRICE DISCOUNT_AMOUNT
+---------- ---------- ---------- ---------- ---------------
+          5 KRITI                kritii@gmail.com     Pokhara
+         4          4          2        700              30
+
+          1 SUDAM                sudam@gmail.com      Kathmandu
+
+
+SQL>
+SQL> SELECT p.Product_ID, p.ProductName, p.ProductPrice, p.StockLevel
+
+SQL> SELECT p.Product_ID, p.Product_Name, p.Product_Price, p.Product_stock
+  2  FROM PRODUCT p
+  3  WHERE p.Product_name LIKE '_a%'
+  4  AND p.Product_Stock > 50;
+FROM PRODUCT p
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT p.Product_ID, p.Product_Name, p.Product_Price, p.Product_stock
+  2  FROM PRODUCTS p
+  3  WHERE p.Product_name LIKE '_a%'
+  4  AND p.Product_Stock > 50;
+
+no rows selected
+
+SQL> SELECT c.CustomerID, c.CustomerName, MAX(o.OrderDate) AS MostRecentOrderDate
+  2  FROM Customer c
+  3  JOIN Order o ON c.CustomerID = o.CustomerID
+  4  GROUP BY c.CustomerID, c.CustomerName
+  5  ORDER BY MostRecentOrderDate DESC
+  6  LIMIT 1;
+JOIN Order o ON c.CustomerID = o.CustomerID
+     *
+ERROR at line 3:
+ORA-00903: invalid table name
+
+
+SQL> SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  2  FROM Customer c
+  3  JOIN Order o ON c.Customer_ID = o.Customer_ID
+  4  GROUP BY c.Customer_ID, c.Customer_Name
+  5  ORDER BY MostRecentOrder_Date DESC
+  6  LIMIT 1;
+JOIN Order o ON c.Customer_ID = o.Customer_ID
+     *
+ERROR at line 3:
+ORA-00903: invalid table name
+
+
+SQL> SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  2  FROM Customer c
+  3  JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  4  GROUP BY c.Customer_ID, c.Customer_Name
+  5  ORDER BY MostRecentOrder_Date DESC
+  6  LIMIT 1;
+LIMIT 1
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  2  FROM Customer c
+  3  JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  4  GROUP BY c.Customer_ID, c.Customer_Name
+  5  ORDER BY MostRecentOrder_Date DESC
+  6  WHERE ROWNUM = 1;
+WHERE ROWNUM = 1
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended
+
+
+SQL>  SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  2    2  FROM Customer c
+  3    3  JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  4    4  GROUP BY c.Customer_ID, c.Customer_Name
+  5    5  ORDER BY MostRecentOrder_Date DESC
+  6
+SQL> SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  2  FROM Customer c
+  3  JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  4  GROUP BY c.Customer_ID, c.Customer_Name
+  5  ORDER BY MostRecentOrder_Date DESC
+  6  )
+  7  WHERE ROWNUM = 1;
+)
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  2  FROM Customer c
+  3  JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  4  GROUP BY c.Customer_ID, c.Customer_Name
+  5  ORDER BY MostRecentOrder_Date DESC
+  6  WHERE ROWNUM = 1;
+WHERE ROWNUM = 1
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT Customer_ID, Customer_Name, MostRecentOrder_Date
+  2  FROM (
+  3    SELECT c.Customer_ID, c.Customer_Name, MAX(o.Order_Date) AS MostRecentOrder_Date
+  4    FROM Customer c
+  5    JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  6    GROUP BY c.Customer_ID, c.Customer_Name
+  7    ORDER BY MostRecentOrder_Date DESC
+  8  )
+  9  WHERE ROWNUM = 1;
+
+CUSTOMER_ID CUSTOMER_NAME        MOSTRECENTORDER_DATE
+----------- -------------------- --------------------
+          2 MANISH                                  0
+
+SQL> SELECT
+  2      strftime('%Y-%m', o.Order_Date) AS OrderMonth,  -- Extract month and year
+  3      SUM(o.Total_Order) AS MonthlyRevenue
+  4  FROM OrderS o
+  5  GROUP BY OrderMonth
+  6  ORDER BY OrderMonth;
+GROUP BY OrderMonth
+         *
+ERROR at line 5:
+ORA-00904: "ORDERMONTH": invalid identifier
+
+
+SQL> SELECT
+  2      TO_CHAR(o.Order_Date, 'YYYY-MM') AS OrderMonth,  -- Extract month and year
+  3      SUM(o.Total_Order) AS MonthlyRevenue
+  4  FROM Orders o
+  5  GROUP BY TO_CHAR(o.Order_Date, 'YYYY-MM')
+  6  ORDER BY OrderMonth;
+GROUP BY TO_CHAR(o.Order_Date, 'YYYY-MM')
+                               *
+ERROR at line 5:
+ORA-01481: invalid number format model
+
+
+SQL> SELECT
+  2      TO_CHAR(o.Order_Date, 'YYYY-MM') AS OrderMonth,  -- Extract month and year
+  3      SUM(o.Total_Order) AS MonthlyRevenue
+  4  FROM Orders o
+  5  GROUP BY TO_CHAR(o.Order_Date, 'YYYY-MM')
+  6  ORDER BY TO_CHAR(o.Order_Date, 'YYYY-MM');
+GROUP BY TO_CHAR(o.Order_Date, 'YYYY-MM')
+                               *
+ERROR at line 5:
+ORA-01481: invalid number format model
+
+
+SQL> SELECT
+  2      strftime('%Y-%m', o.Order_Date) AS OrderMonth,  -- Extract month and year
+  3      SUM(o.Total_Order) AS MonthlyRevenue
+  4  FROM
+  5      Orders o
+  6  GROUP BY
+  7      strftime('%Y-%m', o.Order_Date)  -- Group by the actual expression
+  8  ORDER BY
+  9      OrderMonth;
+    strftime('%Y-%m', o.Order_Date)  -- Group by the actual expression
+    *
+ERROR at line 7:
+ORA-00904: "STRFTIME": invalid identifier
+
+
+SQL> SELECT
+  2      TO_CHAR(o.Order_Date, 'YYYY-MM') AS OrderMonth,  -- Extract month and year
+  3      SUM(o.Total_Order) AS MonthlyRevenue
+  4  FROM
+  5      Orders o
+  6  GROUP BY
+  7      TO_CHAR(o.Order_Date, 'YYYY-MM')  -- Group by the actual expression
+  8  ORDER BY
+  9      OrderMonth;
+    TO_CHAR(o.Order_Date, 'YYYY-MM')  -- Group by the actual expression
+                          *
+ERROR at line 7:
+ORA-01481: invalid number format model
+
+
+SQL> SELECT
+  2      TO_CHAR(od.Order_Date, 'MM-YYYY') AS Month,
+  3      SUM(i.Net_Amount) AS Monthly_Revenue
+  4  FROM
+  5      Order_Detail od
+  6  JOIN
+  7      Invoice i ON od.Invoice_Id = i.Invoice_Id
+  8  GROUP BY
+  9      TO_CHAR(od.Order_Date, 'MM-YYYY')
+ 10  ORDER BY
+ 11      Month ASC;
+    Order_Detail od
+    *
+ERROR at line 5:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT o.Order_ID, o.Customer_ID, o.Total_Order
+  2  FROM Orders o
+  3  WHERE o.Total_Order >= (SELECT AVG(Total_Order) FROM Orders);
+
+  ORDER_ID CUSTOMER_ID TOTAL_ORDER
+---------- ----------- -----------
+         1           2           3
+         4           5           5
+
+SQL> desc vendor;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ VENDOR_ID                                 NOT NULL NUMBER(38)
+ VENDOR_NAME                               NOT NULL VARCHAR2(20)
+ VENDOR_CONTACT                            NOT NULL NUMBER(38)
+
+SQL> SELECT v.Vendor_ID, v.Vendor_Name, v.Vendor_Contact
+  2  FROM Vendor v
+  3  JOIN Products p ON v.Vendor_ID = p.Vendor_ID
+  4  GROUP BY v.Vendor_ID, v.Vendor_Name, v.Vendor_Contact
+  5  HAVING COUNT(DISTINCT p.Product_ID) > 3;
+
+no rows selected
+
+SQL> SELECT v.Vendor_ID, v.Vendor_Name, v.Vendor_Contact, COUNT(DISTINCT p.Product_ID) AS ProductCount
+  2  FROM Vendor v
+  3  JOIN Products p ON v.Vendor_ID = p.Vendor_ID
+  4  GROUP BY v.Vendor_ID, v.Vendor_Name, v.Vendor_Contact
+  5  ORDER BY ProductCount DESC;
+
+ VENDOR_ID VENDOR_NAME          VENDOR_CONTACT PRODUCTCOUNT
+---------- -------------------- -------------- ------------
+         1 ONEPLUS                     9898989            1
+         2 HP                           979797            1
+         5 SONY                         919191            1
+         4 APPLE                        950505            1
+         3 SAMSUNG                      969696            1
+
+SQL>
+SQL> SELECT p.Product_ID, p.Product_Name, p.Product_Price, SUM(oi.Quantity) AS Total_Ordered
+
+  2  FROM Products p
+  3  JOIN Order_Item oi ON p.Product_ID = oi.Product_ID
+  4  GROUP BY p.Product_ID, p.Product_Name, p.Product_Price
+  5  ORDER BY Total_Ordered DESC
+  6  LIMIT 3;
+LIMIT 3
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT * FROM (
+  2    SELECT
+  3      p.Product_ID,
+  4      p.Product_Name,
+  5      p.Product_Price,
+  6      SUM(oi.Quantity) AS Total_Ordered
+  7    FROM Products p
+  8    JOIN Order_Item oi ON p.Product_ID = oi.Product_ID
+  9    GROUP BY p.Product_ID, p.Product_Name, p.Product_Price
+ 10    ORDER BY Total_Ordered DESC
+ 11  ) WHERE ROWNUM <= 3;
+
+PRODUCT_ID PRODUCT_NAME         PRODUCT_PRICE TOTAL_ORDERED
+---------- -------------------- ------------- -------------
+         1 Samsung_S22                 200000             3
+         4 Oneplus_Nord                  7000             2
+         3 ROG15                       230000             1
+
+SQL> SELECT
+  2      c.Customer_ID, c.Customer_Name,
+  3      SUM(o.Total_Order) AS TotalAugustSpending
+  4  FROM Customer c
+  5  JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  6  WHERE strftime('%Y-%m', o.Order_Date) = '2023-08'
+  7  GROUP BY c.Customer_ID, c.Customer_Name
+  8  ORDER BY TotalAugustSpending DESC
+  9  LIMIT 1;
+LIMIT 1
+*
+ERROR at line 9:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT * FROM (
+  2    SELECT
+  3        c.Customer_ID, c.Customer_Name,
+  4        SUM(o.Total_Order) AS TotalAugustSpending
+  5    FROM Customer c
+  6    JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  7    WHERE TO_CHAR(o.Order_Date, 'YYYY-MM') = '2023-08'
+  8    GROUP BY c.Customer_ID, c.Customer_Name
+  9    ORDER BY TotalAugustSpending DESC
+ 10  ) WHERE ROWNUM = 1;
+  WHERE TO_CHAR(o.Order_Date, 'YYYY-MM') = '2023-08'
+                              *
+ERROR at line 7:
+ORA-01481: invalid number format model
+
+
+SQL> SELECT * FROM (
+  2    SELECT
+  3        c.Customer_ID, c.Customer_Name,
+  4        SUM(o.Total_Order) AS TotalAugustSpending
+  5    FROM Customer c
+  6    JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  7    WHERE TO_CHAR(TO_DATE(o.Order_Date, 'YYYY-MM-DD'), 'YYYY-MM') = '2023-08'
+  8    GROUP BY c.Customer_ID, c.Customer_Name
+  9    ORDER BY TotalAugustSpending DESC
+ 10  ) WHERE ROWNUM = 1;
+  WHERE TO_CHAR(TO_DATE(o.Order_Date, 'YYYY-MM-DD'), 'YYYY-MM') = '2023-08'
+                        *
+ERROR at line 7:
+ORA-01840: input value not long enough for date format
+
+
+SQL> SP2-0042: unknown command ")" - rest of line ignored.
+SQL> SELECT * FROM (
+  2    SELECT
+  3        c.Customer_ID, c.Customer_Name,
+  4        SUM(o.Total_Order) AS TotalAugustSpending
+  5    FROM Customer c
+  6    JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  7    WHERE TO_CHAR(o.Order_Date, 'YYYY-MM') = '2023-08'
+  8    GROUP BY c.Customer_ID, c.Customer_Name
+  9    ORDER BY TotalAugustSpending DESC
+ 10  ) WHERE ROWNUM = 1;
+  WHERE TO_CHAR(o.Order_Date, 'YYYY-MM') = '2023-08'
+                              *
+ERROR at line 7:
+ORA-01481: invalid number format model
+
+
+SQL> SELECT * FROM (
+  2    SELECT
+  3        c.Customer_ID, c.Customer_Name,
+  4        SUM(o.Total_Order) AS TotalAugustSpending
+  5    FROM Customer c
+  6    JOIN Orders o ON c.Customer_ID = o.Customer_ID
+  7    WHERE TO_CHAR(TO_DATE(o.Order_Date, 'DD-MM-YYYY'), 'YYYY-MM') = '2023-08'
+  8    GROUP BY c.Customer_ID, c.Customer_Name
+  9    ORDER BY TotalAugustSpending DESC
+ 10  ) WHERE ROWNUM = 1;
+  WHERE TO_CHAR(TO_DATE(o.Order_Date, 'DD-MM-YYYY'), 'YYYY-MM') = '2023-08'
+                        *
+ERROR at line 7:
+ORA-01847: day of month must be between 1 and last day of month
+
+
+SQL> SELECT o.Order_Date
+  2  FROM Orders o
+  3  WHERE ROWNUM <= 10;
+
+ORDER_DATE
+----------
+         0
+         0
+         0
+         0
+
+SQL>
